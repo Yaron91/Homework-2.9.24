@@ -1,0 +1,93 @@
+11. ?
+SELECT * FROM shopping WHERE amount > 1 AND maavar > 5
+SELECT * FROM shopping WHERE maavar BETWEEN 3 AND 5
+
+Answer:
+Retrieve the columns where the amount of items is more than 1 and the aisle number is higher than 5.
+Retrieve the columns which located between aisle 3 and 5.
+
+12. ?
+SELECT * FROM shopping ORDER BY maavar
+SELECT * FROM shopping ORDER BY maavar DESC
+
+Answer:
+Sort the table shopping by the order ascending based on the aisle value.
+Sort the table shopping by the order descending based on the aisle value.
+
+13. ?
+;CREATE TABLE books (id INTEGER PRIMARY KEY, name TEXT);
+INSERT INTO books VALUES (1, 'SQL PROGRAMMING');
+INSERT INTO books VALUES (2, 'CSHARP PROGRAMMING');
+DELETE FROM books
+
+Answer:
+Create a new table named 'books'- first column is ID which is an integer primary key (cannot have duplicated value), second column is the name which will hold string.
+Add an item to the table named 'books', is ID will be 1, and its name is 'SQL PROGRAMMING'.
+Add an item to the table named 'books', is ID will be 1, and its name is 'CSHARP PROGRAMMING'.
+Delete all the column in the table 'books' (the table itself still remains- unlike drop which also deletes the table).
+
+14. ?
+SELECT COUNT(*)from shopping
+SELECT MAX(amount) from shopping
+SELECT AVG(amount) from shopping
+SELECT MIN(amount) from shopping
+
+Answer:
+Retrieve the count of the total number of rows (or items) in the table .
+Retrieve the highest value in the amount column in the table shopping
+Retrieve the average value in the amount column in the table shopping
+Retrieve the lowest value in the amount column in the table shopping
+
+15. ?
+INSERT INTO shopping VALUES (6, 'Onions', 3, 6);
+INSERT INTO shopping VALUES (7, 'Orio', 1, 8);
+Select maavar, COUNT(*)FROM shopping GROUP BY maavar
+
+Answer:
+Error- since there is already an existing item where id = 6, and since its a primary key, it cannot be duplicated.
+Add another item to the table shopping, where the id = 7, its name is 'OREO', the amount is 1, and is located on aisle 8.
+Retrieve all the 'maavar' values, and how many times each value appears in the table.
+
+16. ?
+SELECT id AS "SECRET", name, amount, maavar FROM shopping
+
+Answer:
+Rename the id column to SECRET in the output, just for the specific SQL execute.
+
+17. ?
+Select maavar, COUNT(*)FROM shopping GROUP BY maavar HAVING COUNT(*)>1
+
+Answer:
+Retrieve all the 'maavar' values, and how many times each value appears in the table, but only when the value is higher than 1.
+
+18. ?
+CREATE TABLE prices (id INTEGER PRIMARY KEY, price INTEGER);
+INSERT INTO prices VALUES (1, 3);
+INSERT INTO prices VALUES (2, 7);
+INSERT INTO prices VALUES (3, 12);
+INSERT INTO prices VALUES (4, 5);
+INSERT INTO prices VALUES (5, 3);
+INSERT INTO prices VALUES (6, 2);
+INSERT INTO prices VALUES (7, 10);
+SELECT s.id, s.name, s.amount, s.maavar, p.price FROM shopping s JOIN
+prices p ON s.id=p.id
+
+Answer:
+Create a table named 'prices' with 2 columns- first column is ID which is an integer primary key (cannot have duplicated value), second column is the price which will also hold an integer.
+Enter all the above items into the table, first value for ID which is primary, second value the price.
+Present a combined table of the two tables 'shopping' and 'prices' based on the shopping id = prices id.
+
+מה מחושב בתוך SECRET ? 19.
+SELECT s.id, s.name, s.amount, s.maavar, p.price, s.amount * p.price AS
+"SECRET" FROM shopping s JOIN prices p ON s.id=p.id
+
+Answer:
+The SECRET field store a value of the multiplier between the amount in the 'shopping' table and the price in the 'prices' table.
+
+20. ?
+SELECT s.id, s.name, s.amount, s.maavar, p.price FROM shopping s JOIN
+prices p ON s.id=p.id WHERE p.price = (SELECT MAX(price) FROM
+prices)
+
+Answer:
+Present a combined table of the two tables 'shopping' and 'prices' based on the shopping id = prices id, but also filter to show only the columns where the maximum price in the 'prices' table.

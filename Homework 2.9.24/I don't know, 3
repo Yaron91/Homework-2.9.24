@@ -1,0 +1,52 @@
+)2( פתור:
+
+Students
+ID (INTEGER)PRIMARY KEY NAME (TEXT) CITY (TEXT) BIRTH (INTEGER)
+1 SHALOM TEL AVIV 1974
+2 YURI RAANANA 1980
+3 ANAT RISHON 1994
+4 DANA REHOVOT 1990
+5 OMER JERUSALEM 1987
+
+GRADE
+ID (INTEGER)PRIMARY KEY GRADE (INTEGER)
+1 95
+2 70
+3 85
+4 99
+5 91
+
+כתוב את השאילתות ליצירת הטבלאות )ללא האיכלוס(
+
+Answer:
+CREATE TABLE students (id INTEGER PRIMARY KEY, name TEXT, city TEXT, birth INTEGER);
+CREATE TABLE grades (id INTEGER PRIMARY KEY, grade INTEGER);
+
+כתוב שאילתא אשר מדפיסה את כל התלמידים ולכל תלמיד את הציון שהוא קיבל
+
+Answer:
+SELECT s.id, s.name, s.city, s.birth, g.grade FROM students s JOIN grades g ON s.id = g.id
+
+כתוב שאילתא אשר מחשבת את הממוצע הכיתתי
+
+Answer:
+SELECT AVG(grade) from grades
+
+כתוב שאילתא להוספת עמודה EXCELLENT. כעת שים YES כאשר הציון גבוה מ90- אחרת שים NO
+
+Answer:
+ALTER TABLE grades ADD COLUMN excellent
+UPDATE grades SET excellent = YES where grade > 90
+UPDATE grades SET excellent = No where grade < 91
+
+*כתוב שאילתא אשר מדפיסה את כל התלמידים ולכל תלמיד את הציון שהוא קיבל רק עבור
+התלמידים אשר קיבלו מעל הממוצע
+
+Answer:
+SELECT s.id, s.name, s.city, s.birth, g.grade FROM students s JOIN grades g ON s.id = g.id WHERE g.grade > (SELECT AVG(grade) FROM grades)
+
+כתוב שאילתא אשר מדפיסה את התלמיד ואת ציונו עבור התלמיד אשר קיבל את הציון הגבוה
+ביותר
+
+Answer:
+SELECT s.id, s.name, s.city, s.birth, g.grade FROM students s JOIN grades g ON s.id = g.id WHERE g.grade = (SELECT MAX(grade) FROM grades)
